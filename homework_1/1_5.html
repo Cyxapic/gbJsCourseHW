@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Домашнее задание</title>
+</head>
+
+<body>
+    <h1>Курс по JavaScript</h1>
+    <h3>Домашнее задание №1.5</h3>
+    <div>
+        Пользователь, с помощью команды prompt, вводит номер билета - 6 цифр. <br>
+        Программа определяет является ли счастливым данный билетик и выводит соответстующее сообщение в консоль. <br>
+        Счастливый билет - билет, у которого сумма первых трех цифр равна сумме последних трех цифр номера билета. <br>
+        Для выполнения задания необходимо использовать оператор % и ветвление. <br>
+    </div>
+    <script>
+        const str = prompt("Введите номер сачтливого билета:");
+        let msg = null;
+        if(sum(str.slice(0,3)) === sum(str.slice(3, 6))){
+            msg = "Билет счастливый!! :)";
+        } else {
+            msg = "Билет не счастливый :(";
+        }
+        alert(msg);
+
+        function sum(str){
+            let res = 0;
+            for(s in str){
+                res += Number(str[s]);
+            }
+            return res
+        }
+    </script>
+</body>
+
+</html>
+
+
