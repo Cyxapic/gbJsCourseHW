@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home work</title>
+</head>
+<body>
+    <script>
+        'use strict';
+
+        /**
+        * Объясните почему код даёт именно такие результаты?
+        *
+        * let a = 1, b = 1, c, d;
+        *
+        * c = ++a;
+        * alert(c); // 2
+        * Префиксный инкремент, сначла вычесляется "a+1", за тем присваивается "c"
+        *
+        * d = b++;
+        * alert(d); // 1
+        * Постфиксный инкремент, сначла вычесляется присваивается "d" значение "b"
+        * далее увеличивается b на 1
+        *
+        * c = 2 + ++a;
+        * alert(c); // 5
+        * сначала вычесляется а => 3 далее обычное сложение
+        *
+        * d = 2 + b++;
+        * alert(d); // 4
+        * сначала вычесляется сумма 2 + b(2) в b инкрементируется на 1
+        *
+        * alert(a); // 3
+        * alert(b); // 3
+        * собственно тут выводятся просто значения которые хранятся в "a" и "b"
+        * */
+    </script>
+</body>
+</html>

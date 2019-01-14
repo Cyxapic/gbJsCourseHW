@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home work</title>
+</head>
+<body>
+    <script>
+        'use strict';
+
+        /**
+         * Реализовать основные 4 арифметические операции (+, -, /, *) в виде функций с двумя параметрами.
+         * Обязательно использовать оператор return.
+         * Решил так сделать :) Проверку на неверрный ввод не делал
+         * c if уже набаловался
+         * */
+        
+        /**
+         * Фунция выполняет переданную в виде строки операцию над двумя числами:
+         * @param{number} a первое число;
+         * @param{number} a второе число;
+         * @param{string} operator оператор -> +, -, *, /; defult -> '+';
+         * @returns{number} возращает результат операции округленное до целого числа.
+         * */
+        function calculator(a, b, operator='+') {
+            const operators = {
+                '+': (a, b) => a + b,
+                '-': (a, b) => a - b,
+                '*': (a, b) => a * b,
+                '/': (a, b) => a / b,
+            }
+            return Math.round(operators[operator](a, b), 0);
+        }
+        console.log(calculator(12, 2));
+        console.log(calculator(2, 2, '-'));
+        console.log(calculator(2, 3, '*'));
+        console.log(calculator(8, 2, '/'));
+    </script>
+</body>
+</html>

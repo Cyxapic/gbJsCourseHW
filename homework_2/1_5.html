@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home work</title>
+</head>
+<body>
+
+    <script>
+        'use strict'
+
+        /** 
+         * Реализовать функцию с тремя параметрами: function mathOperation(arg1, arg2, operation),
+         * где arg1, arg2 – значения аргументов, operation – строка с названием операции.
+         * В зависимости от переданного значения операции (использовать switch)
+         * выполнить одну из арифметических операций (использовать функции из задания 4)
+         * и вернуть полученное значение.
+         * */
+    
+        /**
+         * Фунция выполняет переданную в виде строки операцию над двумя числами:
+         * @param{number} arg1 первое число;
+         * @param{number} arg2 второе число;
+         * @param{string} operation операция -> +, -, *, /; defult -> '+';
+         * @returns{number} возращает результат операции число или ошибку в виде строки.
+         * */
+        function mathOperation(arg1, arg2, operation){
+            const add = (a, b) => a + b;
+            const minus = (a, b) => a - b;
+            const multiply = (a, b) => a * b;
+            const divide = (a, b) => a / b;
+
+            let result = null;
+
+            switch(operation) {
+                case '+':
+                    result = add(arg1, arg2);
+                    break;
+                case '-':
+                    result = minus(arg1, arg2);
+                    break;
+                case '*':
+                    result = multiply(arg1, arg2);
+                    break;
+                case '/':
+                    result = divide(arg1, arg2);
+                    break;
+                default:
+                    result = 'Not implemeted!';
+            }
+            if (result === 'Not implemeted!'){
+                return result;
+            }
+            return Math.round(result, 0);
+        }
+        console.log(mathOperation(12, 2, '+'));
+        console.log(mathOperation(2, 2, '-'));
+        console.log(mathOperation(2, 3, '*'));
+        console.log(mathOperation(8, 2, '/'));
+        console.log(mathOperation(8, 2, 'BLA BLA'));
+    </script>
+</body>
+</html>

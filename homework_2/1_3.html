@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home work</title>
+</head>
+<body>
+    <script>
+        'use strict';
+
+        /** 
+         * Объявить две переменные a и b и задать им целочисленные произвольные начальные значения.
+         * Затем написать скрипт, который работает по следующему принципу:
+         * - если a и b положительные, вывести их разность (ноль можно считать положительным числом);
+         * - если а и b отрицательные, вывести их произведение;
+         * - если а и b разных знаков, вывести их сумму;
+         * */
+
+        let a = 1, b = -2;
+        let result = null;
+
+        if (a >= 0 && b >= 0) {
+            result = a - b;
+            console.log(`Разность:${result}`);
+        } else if (a < 0 && b < 0) {
+            result = a * b;
+            console.log(`Произведение:${result}`);
+        } else if ((a >= 0 && b < 0) || (a < 0 && b >= 0)) {
+            result = a + b;
+            console.log(`Сумма:${result}`);
+        } else {
+                console.log('Не определено!');
+        }
+    </script>
+</body>
+</html>
