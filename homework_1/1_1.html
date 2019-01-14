@@ -40,7 +40,7 @@
     <script>
         const Tc = Number(prompt("Введите температуру по цельсию:"));
         const Tf = (9 / 5) * Tc + 32;
-        alert(`Температура по фаренгейту: ${Tf}`);
+        alert(`Температура по фаренгейту: ${Math.round(Tf)}`); // or Tf.toFixed(1) - output STRING
     </script>
 </body>
 </html>
