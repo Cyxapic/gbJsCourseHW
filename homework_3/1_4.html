@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home work</title>
+</head>
+<body>
+    <script>
+        'use strict';
+
+        /**
+         * С помощью цикла while вывести все простые числа в промежутке от 0 до 100 (можно без оптимизаций).
+         * */
+        console.log(0);
+        console.log(1);
+    
+        const end = 100;
+        let num = 2, arr = [];
+
+        for (let i = 0; i <= end; i++){arr[i] = true}
+
+        while (num * num <= end) {
+            for (let i = num + num; i <= end; i = i + num) {
+                arr[i] = false
+            };
+            for (let i = num + 1; i <= end; i++) {
+                if (arr[i]) {num = i; break;}
+            }
+        }
+        for (let i = 1; i < arr.length; i++) {
+            if (arr[i]) {
+                document.write(`${i}<br>`);
+            }
+        }
+    </script>
+</body>
+</html>
