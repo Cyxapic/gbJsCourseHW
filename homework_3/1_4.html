@@ -23,8 +23,8 @@
 
         while (num * num <= end) {
             for (let i = num + num; i <= end; i = i + num) {
-                arr[i] = false
-            };
+                arr[i] = false;
+            }
             for (let i = num + 1; i <= end; i++) {
                 if (arr[i]) {num = i; break;}
             }
