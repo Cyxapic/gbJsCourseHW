@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Бродилка</title>
+    <style>
+        #game {
+            text-align: center;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="game"></div>
+    <script>
+        "use strict";
+
+        /**
+         * Объект игрока
+         * @property {int} score очки заработанные игроком.
+         */
+        const player = {
+            score: 0,
+        };
+    
+        /**
+         * Объект игры, здесь будут все методы и свойства связанные с самой игрой в общем.
+         * @property {player} player Игрок, участвующий в игре.
+         */
+        const game = {
+            player,
+            round: 1,
+            gameBlock: document.querySelector('#game'),
+            /* Это по хорошему должно с серва лететь :)
+            * Поэтому нестал ничего никуда выносить :)
+            */
+            questions: [{
+                    question: 'Что делает метод clear - Консоли в JavaScript?',
+                    answers: `
+                        <ol>
+                            <li>Ничего, он просто для красоты!</li>
+                            <li>Очищает содержимое document.</li>
+                            <li>Очищает все перменные document.</li>
+                            <li>Очищает консоль.</li>
+                            <li>Вызывает GarbageCollector.</li>
+                        </ol>`,
+                    correct: 4,
+                },
+                {
+                    question: 'Что делает метод confirm в JavaScript?',
+                    answers: `
+                        <ol>
+                            <li>Подтверждает использование JavaScript</li>
+                            <li>Метод отображает модальное диалоговое окно с сообщением и двумя кнопками,
+                                OK и Отмена.</li>
+                            <li>Подтверждает выполнение цикла.</li>
+                            <li>Зарпашивает совершенолетие пользователя.</li>
+                            <li>Подтверждает права на браузер.</li>
+                        </ol>`,
+                    correct: 2,
+                },
+                {
+                    question: 'Что делает функция dir в python?',
+                    answers: `
+                        <ol>
+                            <li>Выводит все каталоги.</li>
+                            <li>Выводит имя создателя ЯП - Гвидо Ван Россума.</li>
+                            <li>Возращает в виде списка методы и свойства переданного ей объекта.</li>
+                            <li>Ищет переданную ей директорию от корневого.</li>
+                            <li>Выводит текущий каталог.</li>
+                        </ol>`,
+                    correct: 3,
+                },
+                {
+                    question: 'Что произойдет если в консоли python написать "import this"?',
+                    answers: `
+                        <ol>
+                            <li>Включится режим совместимости с JavaScript.</li>
+                            <li>Импортируется JavaScript движек из основного браузера.</li>
+                            <li>В консоли появиться возможность управлять браузером.</li>
+                            <li>Выведиться исключение ImportError.</li>
+                            <li>Вывидется прекрасный дзен великолепного python.</li>
+                        </ol>`,
+                    correct: 5,
+                },
+                {
+                    question: 'JavaScript это ...?',
+                    answers: `
+                        <ol>
+                            <li>Это разновидность Java только для обучения.</li>
+                            <li>Это макроязык для Java.</li>
+                            <li>Такого языка программирования не существует!</li>
+                            <li>Мультипарадигменный язык программирования.</li>
+                            <li>Это новая версия языка Java.</li>
+                        </ol>`,
+                    correct: 4,
+                },
+            ],
+            /**
+             * Задаем вопрос и выводим на экран варианты ответов.
+             */
+            askQuestion() {
+                const question = this.questions[this.round - 1];
+                this.gameBlock.innerHTML = question['answers'];
+                return parseInt(prompt(question['question']));;
+            },
+            /**
+             * Проверяем ответ игрока.
+             */
+            checkAnswer(answer) {
+                if (answer === this.questions[this.round - 1]['correct']) {
+                    this.player.score++;
+                    alert('И это правильный ответ!!!');
+                } else {
+                    alert('Очень жаль - не повезло :(');
+                }
+                this.round++;
+            },
+            /**
+             * Проверяем окончена ли игра.
+             */
+            checkEndGame() {
+                if (this.round > this.questions.length) {
+                    let winner = 'Не печалься! Еще повезет!';
+                    if (this.questions.length === this.player.score) {
+                        winner = 'КрасавчеГ!!!'
+                    }
+                    this.gameBlock.innerHTML =
+                        `
+                            Вот и подшла наша викторина к завершению!<br>
+                            Вы набрали ${this.player.score} очков!<br>
+                            ${winner}`;
+                    return true;
+                }
+                return false;
+            },
+            /**
+             * Инициализирует новую игру.
+             */
+            init() {
+                this.player.score = 0;
+                this.round = 1;
+                this.gameBlock.innerHTML =
+                    `
+                    Добро пожаловать в
+                    <br>
+                    Кто хочет стать миллионером?`;
+            },
+            /**
+             * Запускает игру.
+             */
+            run() {
+                this.init();
+                while (true) {
+                    if (this.checkEndGame()) {
+                        return;
+                    }
+                    if (!confirm('Играем дальше?')) {
+                        this.gameBlock.innerHTML = 'До свидания!';
+                        return;
+                    }
+                    const answer = this.askQuestion();
+                    if (isNaN(answer)) {
+                        alert('Не верный формат ответа - используйте числа от 1 до 5!')
+                        continue;
+                    } else {
+                        this.checkAnswer(answer);
+                    }
+                }
+            },
+        };
+        game.run();
+    </script>
+</body>
+
+</html>
