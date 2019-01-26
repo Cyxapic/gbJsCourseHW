@@ -57,93 +57,48 @@
         'use strict';
 
         /**
-         * Объект настройки доски
-         * */
-        const setup = {
-            row: 10,
-            col: 10,
-            titles: 'ABCDEFGH',
-            cellDarkClass: 'dark',
-            cellLightClass: 'light',
-        };
-        /**
          * Объект шахматной доски
          * */
         const desk = {
             chessDeskEl: document.querySelector('#chess-desk'),
-            setup: setup,
-            cell: null,
-            /**
-             * Функция отображает шахматную доску
-             * */
-            drawDesk() {
-                // Задаем начальный класс ячейки
-                this.cell = this.setup.cellDarkClass;
-                // Создаем строки доски
-                for (let row = 1; row <= this.setup.row; row++) {
-                    // Создаем первую и последнюю строку доски
-                    if (row === 1 || row === this.setup.row) {
-                        this.chessDeskEl.appendChild(this.titleLine());
-                    } else {
-                        this.chessDeskEl.appendChild(this.createRow(row));
-                        this.changeCellStyle();
+            cellDarkClass: 'dark',
+            cellLightClass: 'light',
+            drawDesk(){
+                const rows = [0, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+                const cols = [0, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 0];
+                for (let row = 0; row < rows.length; row++) {
+                    const rowDiv = document.createElement('div');
+                    rowDiv.classList.add('row');
+                    
+                    for (let col = 0; col < cols.length; col++){
+                        let div = document.createElement('div');
+                        div.classList.add('cell');
+                        if (rows[row] === 0 && cols[col] !== 0) {
+                            div.innerText = cols[col];
+                        } else if (rows[row] !== 0 && cols[col] === 0) {
+                            div.innerText = rows[row];
+                        }
+                        if (this.isCellBlack(row, col)){
+                            div.classList.add(this.cellDarkClass);
+                        } else {
+                            div.classList.add(this.cellLightClass);
+                        }
+                        rowDiv.appendChild(div);
                     }
+                    this.chessDeskEl.appendChild(rowDiv);
                 }
             },
-            /**
-             * Функция изменяет стиль ячейки шахматной доски
+             /**
+             * Функция проверяет черная ли ячейка элемент ячейки
+             * @parmas {Number} - номер ячейки строки
+             * @parmas {Number} - номер ячейки колонки
+             * @retrun {boolean}
              * */
-            changeCellStyle() {
-                if (this.cell === this.setup.cellDarkClass) {
-                    this.cell = this.setup.cellLightClass;
-                } else {
-                    this.cell = this.setup.cellDarkClass;
+            isCellBlack(row, col){
+                if (row === 0 || row === 9 || col === 0 || col === 9) {
+                    return false;
                 }
-            },
-            /**
-             * Функция создает элемент ячейки
-             * @parmas {string} - стиль CSS ячейки
-             * @parmas {string | number} - контент ячейки строка или число, помещается в ячейку
-             * */
-            createCell(cellClass, content = null) {
-                let div = document.createElement('div');
-                div.classList.add('cell', cellClass);
-                if (content) {
-                    div.innerText = content;
-                }
-                return div;
-            },
-            /**
-             * Функция создает колнку доски с буквенными обозначениями
-             * */
-            titleLine() {
-                const rowDiv = document.createElement('div');
-                rowDiv.classList.add('row');
-                rowDiv.appendChild(this.createCell(this.setup.cellLightClass));
-                for (const sym of this.setup.titles) {
-                    rowDiv.appendChild(this.createCell(this.setup.cellLightClass, sym));
-                }
-                rowDiv.appendChild(this.createCell(this.setup.cellLightClass));
-                return rowDiv;
-            },
-            /**
-             * Функция создает колнку доски
-             *
-             * @param {Number} - номер строки
-             * @return {Node} - возращает строку шахматной доски
-             * */
-            createRow(row) {
-                const rowDiv = document.createElement('div');
-                rowDiv.classList.add('row');
-                for (let i = 1; i <= this.setup.col; i++) {
-                    if (i === 1 || i === this.setup.col) {
-                        rowDiv.appendChild(this.createCell(this.setup.cellLightClass, Math.abs(row - 10)));
-                    } else {
-                        rowDiv.appendChild(this.createCell(this.cell));
-                        this.changeCellStyle();
-                    }
-                }
-                return rowDiv;
+                return (row % 2 === 1 && col % 2 === 0) || (row % 2 === 0 && col % 2 === 1)
             },
         };
 
