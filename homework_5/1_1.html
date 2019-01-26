@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home work</title>
+    <style>
+        :root {
+            --cell-size: 50px;
+            --light-cell: #cecece;
+            --dark-cell: #565755;
+            --border-color: #000000;
+            --border-line: 1px;
+        }
+
+        .wrap {
+            display: flex;
+            justify-content: center;
+        }
+
+        .chess-desk {
+            display: flex;
+            width: calc(var(--cell-size) * 10);
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .row {
+            display: flex;
+        }
+
+        .cell {
+            width: var(--cell-size);
+            height: var(--cell-size);
+            border: var(--border-line) solid var(--border-color);
+            text-align: center;
+            line-height: var(--cell-size);
+        }
+
+        .light {
+            background-color: var(--light-cell);
+        }
+
+        .dark {
+            background-color: var(--dark-cell);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div id="chess-desk" class="chess-desk"></div>
+    </div>
+    <script>
+        'use strict';
+
+        /**
+         * Объект настройки доски
+         * */
+        const setup = {
+            row: 10,
+            col: 10,
+            titles: 'ABCDEFGH',
+            cellDarkClass: 'dark',
+            cellLightClass: 'light',
+        };
+        /**
+         * Объект шахматной доски
+         * */
+        const desk = {
+            chessDeskEl: document.querySelector('#chess-desk'),
+            setup: setup,
+            rowNum: 1,
+            cell: null,
+            /**
+             * Функция возращает значения стиля ячейки (начальное значение)
+             * шахматной доски
+             * */
+            getStartCell: function () {
+                return this.setup.cellLightClass;
+            },
+            /**
+             * Функция изменяет стиль ячейки шахматной доски
+             * */
+            changeCellStyle: function () {
+                if (this.cell === this.setup.cellDarkClass) {
+                    this.cell = this.setup.cellLightClass;
+                } else {
+                    this.cell = this.setup.cellDarkClass;
+                }
+            },
+            /**
+             * Функция создает элемент ячейки
+             * @parmas {string} - стиль CSS ячейки
+             * @parmas {string OR number} - контент ячейки строка или число, помещается в ячейку
+             * */
+            createCell: function (cellClass, content = null) {
+                let div = document.createElement('div');
+                div.classList.add('cell', cellClass);
+                if (content) {
+                    div.innerText = content;
+                }
+                return div;
+            },
+            /**
+             * Функция создает колнку доски с буквенными обозначениями
+             * */
+            titleLine: function () {
+                const rowDiv = document.createElement('div');
+                rowDiv.classList.add('row');
+                rowDiv.appendChild(this.createCell(this.setup.cellLightClass));
+                for (const sym of this.setup.titles) {
+                    rowDiv.appendChild(this.createCell(this.setup.cellLightClass, sym));
+                }
+                rowDiv.appendChild(this.createCell(this.setup.cellLightClass));
+                return rowDiv;
+            },
+            /**
+             * Функция создает колнку доски
+             * */
+            createRow: function () {
+                const rowDiv = document.createElement('div');
+                rowDiv.classList.add('row');
+                for (let i = 1; i <= this.setup.col; i++) {
+                    if (i === 1 || i === this.setup.col) {
+                        rowDiv.appendChild(this.createCell(this.setup.cellLightClass, this.rowNum));
+                    } else {
+                        rowDiv.appendChild(this.createCell(this.cell));
+                        this.changeCellStyle();
+                    }
+                };
+                this.rowNum++;
+                return rowDiv;
+            },
+            /**
+             * Функция отображает шахматную доску
+             * */
+            drawDesk: function () {
+                // Задаем начальный класс ячейки
+                this.cell = this.getStartCell();
+                // Создаем строки доски
+                for (let i = 1; i <= this.setup.row; i++) {
+                    // Создаем первую и последнюю строку доски
+                    if (i === 1 || i === this.setup.row) {
+                        this.chessDeskEl.appendChild(this.titleLine());
+                    } else {
+                        this.chessDeskEl.appendChild(this.createRow());
+                        this.changeCellStyle();
+                    }
+                };
+            }
+        };
+        desk.drawDesk();
+    </script>
+</body>
+
+</html>
