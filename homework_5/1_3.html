@@ -92,7 +92,8 @@
         btn.addEventListener('click', function (event) {
             event.preventDefault();
             const validator = new Validator(event.target.form);
-            validator.validateForm();
+            const valid = validator.validateForm();
+            if (valid){event.target.form.submit();}
         });
 
         class Validator {
@@ -151,7 +152,7 @@
             };
             /**
              * Функция валидации пароля
-             * @return {bool} - возращает true если все верно
+             * @return {boolean} - возращает true если все верно
              * */
             password() {
                 const passwordInput = this.form.querySelector('input[name="password"]');
@@ -178,9 +179,11 @@
                 this.form.querySelectorAll('.error').forEach(function(error){
                     error.remove();
                 });
-                if (this.name() && this.phone() && this.password()) {
-                    this.form.submit();
-                }
+                const name = this.name();
+                const phone = this.phone();
+                const password = this.password();
+
+                return ( name && phone && password );
             };
         }
     </script>

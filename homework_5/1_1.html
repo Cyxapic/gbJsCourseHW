@@ -72,19 +72,28 @@
         const desk = {
             chessDeskEl: document.querySelector('#chess-desk'),
             setup: setup,
-            rowNum: 1,
             cell: null,
             /**
-             * Функция возращает значения стиля ячейки (начальное значение)
-             * шахматной доски
+             * Функция отображает шахматную доску
              * */
-            getStartCell: function () {
-                return this.setup.cellLightClass;
+            drawDesk() {
+                // Задаем начальный класс ячейки
+                this.cell = this.setup.cellDarkClass;
+                // Создаем строки доски
+                for (let row = 1; row <= this.setup.row; row++) {
+                    // Создаем первую и последнюю строку доски
+                    if (row === 1 || row === this.setup.row) {
+                        this.chessDeskEl.appendChild(this.titleLine());
+                    } else {
+                        this.chessDeskEl.appendChild(this.createRow(row));
+                        this.changeCellStyle();
+                    }
+                }
             },
             /**
              * Функция изменяет стиль ячейки шахматной доски
              * */
-            changeCellStyle: function () {
+            changeCellStyle() {
                 if (this.cell === this.setup.cellDarkClass) {
                     this.cell = this.setup.cellLightClass;
                 } else {
@@ -94,9 +103,9 @@
             /**
              * Функция создает элемент ячейки
              * @parmas {string} - стиль CSS ячейки
-             * @parmas {string OR number} - контент ячейки строка или число, помещается в ячейку
+             * @parmas {string | number} - контент ячейки строка или число, помещается в ячейку
              * */
-            createCell: function (cellClass, content = null) {
+            createCell(cellClass, content = null) {
                 let div = document.createElement('div');
                 div.classList.add('cell', cellClass);
                 if (content) {
@@ -107,7 +116,7 @@
             /**
              * Функция создает колнку доски с буквенными обозначениями
              * */
-            titleLine: function () {
+            titleLine() {
                 const rowDiv = document.createElement('div');
                 rowDiv.classList.add('row');
                 rowDiv.appendChild(this.createCell(this.setup.cellLightClass));
@@ -119,39 +128,25 @@
             },
             /**
              * Функция создает колнку доски
+             *
+             * @param {Number} - номер строки
+             * @return {Node} - возращает строку шахматной доски
              * */
-            createRow: function () {
+            createRow(row) {
                 const rowDiv = document.createElement('div');
                 rowDiv.classList.add('row');
                 for (let i = 1; i <= this.setup.col; i++) {
                     if (i === 1 || i === this.setup.col) {
-                        rowDiv.appendChild(this.createCell(this.setup.cellLightClass, this.rowNum));
+                        rowDiv.appendChild(this.createCell(this.setup.cellLightClass, row));
                     } else {
                         rowDiv.appendChild(this.createCell(this.cell));
                         this.changeCellStyle();
                     }
-                };
-                this.rowNum++;
+                }
                 return rowDiv;
             },
-            /**
-             * Функция отображает шахматную доску
-             * */
-            drawDesk: function () {
-                // Задаем начальный класс ячейки
-                this.cell = this.getStartCell();
-                // Создаем строки доски
-                for (let i = 1; i <= this.setup.row; i++) {
-                    // Создаем первую и последнюю строку доски
-                    if (i === 1 || i === this.setup.row) {
-                        this.chessDeskEl.appendChild(this.titleLine());
-                    } else {
-                        this.chessDeskEl.appendChild(this.createRow());
-                        this.changeCellStyle();
-                    }
-                };
-            }
         };
+
         desk.drawDesk();
     </script>
 </body>
