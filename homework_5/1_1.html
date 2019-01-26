@@ -137,7 +137,7 @@
                 rowDiv.classList.add('row');
                 for (let i = 1; i <= this.setup.col; i++) {
                     if (i === 1 || i === this.setup.col) {
-                        rowDiv.appendChild(this.createCell(this.setup.cellLightClass, row));
+                        rowDiv.appendChild(this.createCell(this.setup.cellLightClass, Math.abs(row - 10)));
                     } else {
                         rowDiv.appendChild(this.createCell(this.cell));
                         this.changeCellStyle();

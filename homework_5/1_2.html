@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chess</title>
+    <style>
+        :root {
+            --cell-size: 50px;
+            --light-cell: #cecece;
+            --dark-cell: #565755;
+            --border-color: #000000;
+            --border-line: 1px;
+        }
+
+        .wrap {
+            display: flex;
+            justify-content: center;
+        }
+
+        .chess-desk {
+            display: flex;
+            width: calc(var(--cell-size) * 10);
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .row {
+            display: flex;
+        }
+
+        .cell {
+            width: var(--cell-size);
+            height: var(--cell-size);
+            border: var(--border-line) solid var(--border-color);
+            text-align: center;
+            line-height: var(--cell-size);
+        }
+
+        .light {
+            background-color: var(--light-cell);
+        }
+
+        .dark {
+            background-color: var(--dark-cell);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="chess-desk" class="chess-desk">
+        <div class="row">
+            <div class="cell light"></div>
+            <div class="cell light">A</div>
+            <div class="cell light">B</div>
+            <div class="cell light">C</div>
+            <div class="cell light">D</div>
+            <div class="cell light">E</div>
+            <div class="cell light">F</div>
+            <div class="cell light">G</div>
+            <div class="cell light">H</div>
+            <div class="cell light"></div>
+        </div>
+        <div class="row">
+            <div class="cell light">2</div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell light">2</div>
+        </div>
+        <div class="row">
+            <div class="cell light">3</div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light">3</div>
+        </div>
+        <div class="row">
+            <div class="cell light">4</div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell light">4</div>
+        </div>
+        <div class="row">
+            <div class="cell light">5</div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light">5</div>
+        </div>
+        <div class="row">
+            <div class="cell light">6</div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell light">6</div>
+        </div>
+        <div class="row">
+            <div class="cell light">7</div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light">7</div>
+        </div>
+        <div class="row">
+            <div class="cell light">8</div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell light">8</div>
+        </div>
+        <div class="row">
+            <div class="cell light">9</div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light"></div>
+            <div class="cell dark"></div>
+            <div class="cell light">9</div>
+        </div>
+        <div class="row">
+            <div class="cell light"></div>
+            <div class="cell light">A</div>
+            <div class="cell light">B</div>
+            <div class="cell light">C</div>
+            <div class="cell light">D</div>
+            <div class="cell light">E</div>
+            <div class="cell light">F</div>
+            <div class="cell light">G</div>
+            <div class="cell light">H</div>
+            <div class="cell light"></div>
+        </div>
+    </div>
+</body>
+
+</html>
