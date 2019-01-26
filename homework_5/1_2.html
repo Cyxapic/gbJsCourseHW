@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Chess</title>
+    <title>Home work</title>
     <style>
         :root {
             --cell-size: 50px;
@@ -46,134 +46,134 @@
         .dark {
             background-color: var(--dark-cell);
         }
+        .figure{
+            font-size: 2.5em;
+        }
     </style>
 </head>
 
 <body>
     <div class="wrap">
-        <div id="chess-desk" class="chess-desk">
-            <div class="row">
-                <div class="cell light"></div>
-                <div class="cell light">A</div>
-                <div class="cell light">B</div>
-                <div class="cell light">C</div>
-                <div class="cell light">D</div>
-                <div class="cell light">E</div>
-                <div class="cell light">F</div>
-                <div class="cell light">G</div>
-                <div class="cell light">H</div>
-                <div class="cell light"></div>
-            </div>
-            <div class="row">
-                <div class="cell light">8</div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light">8</div>
-            </div>
-            <div class="row">
-                <div class="cell light">7</div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell light">7</div>
-            </div>
-            <div class="row">
-                <div class="cell light">6</div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light">6</div>
-            </div>
-            <div class="row">
-                <div class="cell light">5</div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell light">5</div>
-            </div>
-            <div class="row">
-                <div class="cell light">4</div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light">4</div>
-            </div>
-            <div class="row">
-                <div class="cell light">3</div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell light">3</div>
-            </div>
-            <div class="row">
-                <div class="cell light">2</div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light">2</div>
-            </div>
-            <div class="row">
-                <div class="cell light">1</div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell dark"></div>
-                <div class="cell light"></div>
-                <div class="cell light">1</div>
-            </div>
-            <div class="row">
-                <div class="cell light"></div>
-                <div class="cell light">A</div>
-                <div class="cell light">B</div>
-                <div class="cell light">C</div>
-                <div class="cell light">D</div>
-                <div class="cell light">E</div>
-                <div class="cell light">F</div>
-                <div class="cell light">G</div>
-                <div class="cell light">H</div>
-                <div class="cell light"></div>
-            </div>
-        </div>
+        <div id="chess-desk" class="chess-desk"></div>
     </div>
+    <script>
+        'use strict';
+
+        /**
+         * Объект шахматной доски
+         * */
+        const desk = {
+            chessDeskEl: document.querySelector('#chess-desk'),
+            cellDarkClass: 'dark',
+            cellLightClass: 'light',
+            figures:[
+                {'name': 'pW', pos:'H2',},
+                {'name': 'pW', pos:'G2',},
+                {'name': 'pW', pos:'F2',},
+                {'name': 'pW', pos:'E2',},
+                {'name': 'pW', pos:'D2',},
+                {'name': 'pW', pos:'C2',},
+                {'name': 'pW', pos:'B2',},
+                {'name': 'pW', pos:'A2',},
+
+                {'name': 'RW', pos:'H1',},
+                {'name': 'NW', pos:'G1',},
+                {'name': 'BW', pos:'F1',},
+                {'name': 'QW', pos:'E1',},
+                {'name': 'KW', pos:'D1',},
+                {'name': 'BW', pos:'C1',},
+                {'name': 'NW', pos:'B1',},
+                {'name': 'RW', pos:'A1',},
+                
+                {'name': 'pB', pos:'H7',},
+                {'name': 'pB', pos:'G7',},
+                {'name': 'pB', pos:'F7',},
+                {'name': 'pB', pos:'E7',},
+                {'name': 'pB', pos:'D7',},
+                {'name': 'pB', pos:'C7',},
+                {'name': 'pB', pos:'B7',},
+                {'name': 'pB', pos:'A7',},
+
+                {'name': 'RB', pos:'H8',},
+                {'name': 'NB', pos:'G8',},
+                {'name': 'BB', pos:'F8',},
+                {'name': 'QB', pos:'E8',},
+                {'name': 'KB', pos:'D8',},
+                {'name': 'BB', pos:'C8',},
+                {'name': 'NB', pos:'B8',},
+                {'name': 'RB', pos:'A8',},
+            ],
+            figureHTML:{
+                'KW': '&#9812',
+                'QW': '&#9813',
+                'RW': '&#9814',
+                'BW': '&#9815',
+                'NW': '&#9816',
+                'pW': '&#9817',
+
+                'KB': '&#9818',
+                'QB': '&#9819',
+                'RB': '&#9820',
+                'BB': '&#9821',
+                'NB': '&#9822',
+                'pB': '&#9823',
+            },
+            drawDesk(){
+                const rows = [0, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+                const cols = [0, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 0];
+                for (let row = 0; row < rows.length; row++) {
+                    const rowDiv = document.createElement('div');
+                    rowDiv.classList.add('row');
+                    
+                    for (let col = 0; col < cols.length; col++){
+                        let div = document.createElement('div');
+                        div.classList.add('cell');
+                        div.dataset.row = rows[row];
+                        div.dataset.col = cols[col];
+                        if (rows[row] === 0 && cols[col] !== 0) {
+                            div.innerText = cols[col];
+                        } else if (rows[row] !== 0 && cols[col] === 0) {
+                            div.innerText = rows[row];
+                        }
+                        if (this.isCellBlack(row, col)){
+                            div.classList.add(this.cellDarkClass);
+                        } else {
+                            div.classList.add(this.cellLightClass);
+                        }
+                        rowDiv.appendChild(div);
+                    }
+                    this.chessDeskEl.appendChild(rowDiv);
+                }
+            },
+             /**
+             * Функция проверяет черная ли ячейка элемент ячейки
+             * @parmas {Number} - номер ячейки строки
+             * @parmas {Number} - номер ячейки колонки
+             * @retrun {boolean}
+             * */
+            isCellBlack(row, col){
+                if (row === 0 || row === 9 || col === 0 || col === 9) {
+                    return false;
+                }
+                return (row % 2 === 1 && col % 2 === 0) || (row % 2 === 0 && col % 2 === 1)
+            },
+            drawFigures() {
+                for (const figure of this.figures) {
+                    const col = figure.pos.charAt(0);
+                    const row = figure.pos.charAt(1);
+                    const cell = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+                    const figEl = document.createElement('span');
+                    figEl.classList.add('figure');
+                    figEl.innerHTML=this.figureHTML[figure.name];
+                    cell.appendChild(figEl);
+                    
+                }
+            },
+        };
+
+        desk.drawDesk();
+        desk.drawFigures();
+    </script>
 </body>
 
 </html>
