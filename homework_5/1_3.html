@@ -93,15 +93,17 @@
             event.preventDefault();
             const validator = new Validator(event.target.form);
             validator.validateForm();
-            // validator.name();
-            // validator.phone();
-            // validator.password();
         });
 
         class Validator {
             constructor(form) {
                 this.form = form;
             };
+             /**
+             * Функция создает элемент с выводом ошибки валидации
+             * @parmas {string} - текст ошибки
+             * @parmas {Node} - элемент после которого в форме необходимо вывести ошибку
+             * */
             createErrorBlock(msg, node) {
                 const block = document.createElement('div');
                 block.classList.add('error');
@@ -111,6 +113,10 @@
                     node.parentNode.nextSibling
                 );
             };
+            /**
+             * Функция валидации имени
+             * @return {bool} - возращает true если все верно
+             * */
             name() {
                 const nameInput = this.form.querySelector('input[name="name"]');
                 if (nameInput.value.length < 1 || nameInput.value.length > 50) {
@@ -125,6 +131,10 @@
                 }
                 return true;
             };
+            /**
+             * Функция валидации телефонного номера
+             * @return {bool} - возращает true если все верно
+             * */
             phone() {
                 const phoneInput = this.form.querySelector('input[name="phone"]');
                 if (phoneInput.value.length !== 11) {
@@ -139,6 +149,10 @@
                 }
                 return true;
             };
+            /**
+             * Функция валидации пароля
+             * @return {bool} - возращает true если все верно
+             * */
             password() {
                 const passwordInput = this.form.querySelector('input[name="password"]');
                 const passwordInput1 = this.form.querySelector('input[name="password1"]');
@@ -157,6 +171,9 @@
                 }
                 return true;
             };
+            /**
+             * Функция точка входа - валидация всех полей
+             * */
             validateForm() {
                 this.form.querySelectorAll('.error').forEach(function(error){
                     error.remove();
