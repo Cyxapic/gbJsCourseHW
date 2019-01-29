@@ -69,7 +69,16 @@
     <script src="js/hw1_2.js"></script>
     <script>
         const basket = new Basket();
-        console.log(basket);
+        const buyBtns = document.querySelectorAll('.buy-btn');
+        buyBtns.forEach((btn) => {
+            btn.addEventListener('click', (event) => {
+                basket.add(
+                    event.target.dataset.name,
+                    event.target.dataset.price,
+                );
+                basket.render();
+            });
+        });
     </script>
 </body>
 
