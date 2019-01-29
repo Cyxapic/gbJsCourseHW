@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home work</title>
+    <style>
+        :root {
+            --cell-size: 50px;
+            --light-cell: #cecece;
+            --dark-cell: #565755;
+            --border-color: #000000;
+            --border-line: 1px;
+        }
+
+        .wrap {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            width: 50%;
+        }
+
+        .item {
+            margin-top: 25px;
+            padding: 10px;
+            border: var(--border-line) solid var(--border-color);
+        }
+
+        .basket {
+            margin-top: 25px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div id="container" class="content">
+            <div class="item">
+                <img src="images/karandash.jpg" width="200" alt="карандаш">
+                Цена: 15 руб.
+                <button class="buy-btn" data-price="15" data-name="Карандаш">Купить</button>
+            </div>
+            <div class="item">
+                <img src="images/mouse.jpg" width="200" alt="мышка">
+                Цена: 250 руб.
+                <button class="buy-btn" data-price="250" data-name="Мышка">Купить</button>
+            </div>
+            <div class="item">
+                <img src="images/keyboard.jpeg" width="200" alt="клавиатура">
+                Цена: 350 руб.
+                <button class="buy-btn" data-price="350" data-name="Клавиатура">Купить</button>
+            </div>
+        </div>
+        <div id="basket" class="basket">
+            Количество товаров: <span id="basket-count">0</span>
+            <br>
+            Итого: <span id="basket-price">0</span>
+        </div>
+    </div>
+    <script src="js/hw1_2.js"></script>
+    <script>
+        const basket = new Basket();
+        console.log(basket);
+    </script>
+</body>
+
+</html>

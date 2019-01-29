@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Validate form</title>
+    <style>
+        .wrap {
+            display: flex;
+            justify-content: center;
+        }
+        form{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+        label{
+            display: block;
+            margin-top: 25px;
+        }
+        input{
+            width: 100%;
+            padding: 5px 10px;
+        }
+        input:focus{
+            border-color: #57b0ff;
+        }
+        button{
+            background-color: #0c3e69;
+            color: azure;
+            border-radius: 10px;
+            font-size: 1.2em;
+            margin-top: 30px;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .invalid-feedback{
+            border-color: #ff0000;
+        }
+        .error{
+            margin-top: 5px;
+            padding: 5px;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <form id="form">
+            <label for="">Имя
+                <input type="text" name="name">
+            </label>
+            <label for="">Телефон
+                <input type="text" name="phone">
+            </label>
+            <label for="">Пароль
+                <input type="password" name="password">
+            </label>
+            <label for="">Повтор пароля
+                <input type="password" name="password1">
+            </label>
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
+    <script>
+        "use strict";
+
+    </script>
+</body>
+
+</html>
