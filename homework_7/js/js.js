@@ -145,9 +145,12 @@ const map = {
    * Отображает все объекты на карте.
    * @param {{x: int, y: int}[]} snakePointsArray Массив с точками змейки.
    * @param {{x: int, y: int}} foodPoint Точка еды.
+   * @param {number} score набранные очки.
+   * @param {number} maxX максимальная координата по X.
+   * @param {number} maxY максимальная координата по Y.
    * @see {@link https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach|Array.prototype.forEach()}
    */
-  render(snakePointsArray, foodPoint, score) {
+  render(snakePointsArray, foodPoint, score, maxX, maxY) {
     // Чистим карту от предыдущего рендера, всем занятым ячейкам оставляем только класс cell.
     for (const cell of this.usedCells) {
       cell.className = 'cell';
@@ -158,10 +161,12 @@ const map = {
     snakePointsArray.forEach((point, idx) => {
       // Получаем элемент ячейки змейки по точке point.
       const snakeCell = this.cells[`x${point.x}_y${point.y}`];
-      // Если первый элемент массива, значит это голова, иначе тело.
-      snakeCell.classList.add(idx === 0 ? 'snakeHead' : 'snakeBody');
-      // Добавляем элемент ячейки змейки в массив занятых точек на карте.
-      this.usedCells.push(snakeCell);
+      if (point.x > 0 && point.x < maxX && point.y > 0 && point.y < maxY) {
+        // Если первый элемент массива, значит это голова, иначе тело.
+        snakeCell.classList.add(idx === 0 ? 'snakeHead' : 'snakeBody');
+        // Добавляем элемент ячейки змейки в массив занятых точек на карте.
+        this.usedCells.push(snakeCell);
+      };
     });
     // Получаем элемент ячейки с едой по точке foodPoint.
     const foodCell = this.cells[`x${foodPoint.x}_y${foodPoint.y}`];
@@ -272,6 +277,20 @@ const snake = {
    */
   setDirection(direction) {
     this.direction = direction;
+  },
+  /**
+   * Set x coord
+   * @params {number} - x coordinate
+   */
+  setX(x) {
+    this.body[0].x = x;
+  },
+  /**
+   * Set y coord
+   * @params {number} - y coordinate
+   */
+  setY(y) {
+    this.body[0].y = y;
   },
 };
 
@@ -458,6 +477,7 @@ const game = {
     if (!this.canMakeStep()) {
       return this.finish();
     }
+    this.boundaries();
     // Если следующий шаг будет на еду, то заходим в if.
     if (this.food.isOnPoint(this.snake.getNextStepHeadPoint())) {
       // Прибавляем к змейке ячейку.
@@ -516,7 +536,13 @@ const game = {
    * Отображает все для игры, карту, еду и змейку.
    */
   render() {
-    this.map.render(this.snake.getBody(), this.food.getCoordinates(), this.getScore());
+    this.map.render(
+      this.snake.getBody(),
+      this.food.getCoordinates(),
+      this.getScore(),
+      this.config.getRowsCount(),
+      this.config.getColsCount(),
+    );
   },
 
   /**
@@ -632,11 +658,24 @@ const game = {
     // Получаем следующую точку головы змейки в соответствии с текущим направлением.
     const nextHeadPoint = this.snake.getNextStepHeadPoint();
     // Змейка может сделать шаг если следующая точка не на теле змейки и точка внутри игрового поля.
-    return !this.snake.isOnPoint(nextHeadPoint) &&
-      nextHeadPoint.x < this.config.getColsCount() &&
-      nextHeadPoint.y < this.config.getRowsCount() &&
-      nextHeadPoint.x >= 0 &&
-      nextHeadPoint.y >= 0;
+    return !this.snake.isOnPoint(nextHeadPoint) //&&
+      // nextHeadPoint.x < this.config.getColsCount() &&
+      // nextHeadPoint.y < this.config.getRowsCount() &&
+      // nextHeadPoint.x >= 0 &&
+      // nextHeadPoint.y >= 0;
+  },
+  boundaries() {
+    const nextHeadPoint = this.snake.getNextStepHeadPoint();
+    if (nextHeadPoint.x > this.config.getRowsCount()) {
+      this.snake.setX(1);
+    } else if (nextHeadPoint.x < 0) {
+      this.snake.setX(this.config.getRowsCount());
+    }
+    if (nextHeadPoint.y > this.config.getColsCount()) {
+      this.snake.setY(0);
+    } else if (nextHeadPoint.y < 0) {
+      this.snake.setY(this.config.getColsCount());
+    }
   },
   /**
    * function retruns game score
