@@ -8,3 +8,7 @@
     - 1-1 Chess desk
     - 1-2 None :(
     - 1-3 Form validation
+- lesson 6
+    - 1-2 oreders user
+- lesson 7
+    - 1-1 BUGFIX snake
