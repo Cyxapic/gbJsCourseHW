@@ -161,7 +161,7 @@ const map = {
     snakePointsArray.forEach((point, idx) => {
       // Получаем элемент ячейки змейки по точке point.
       const snakeCell = this.cells[`x${point.x}_y${point.y}`];
-      if (point.x > 0 && point.x < maxX && point.y > 0 && point.y < maxY) {
+      if (point.x >= 0 && point.x < maxX && point.y >= 0 && point.y < maxY) {
         // Если первый элемент массива, значит это голова, иначе тело.
         snakeCell.classList.add(idx === 0 ? 'snakeHead' : 'snakeBody');
         // Добавляем элемент ячейки змейки в массив занятых точек на карте.
@@ -279,14 +279,14 @@ const snake = {
     this.direction = direction;
   },
   /**
-   * Set x coord
+   * Set x coord of snake head
    * @params {number} - x coordinate
    */
   setX(x) {
     this.body[0].x = x;
   },
   /**
-   * Set y coord
+   * Set y coord of snake head
    * @params {number} - y coordinate
    */
   setY(y) {
@@ -658,16 +658,15 @@ const game = {
     // Получаем следующую точку головы змейки в соответствии с текущим направлением.
     const nextHeadPoint = this.snake.getNextStepHeadPoint();
     // Змейка может сделать шаг если следующая точка не на теле змейки и точка внутри игрового поля.
-    return !this.snake.isOnPoint(nextHeadPoint) //&&
-      // nextHeadPoint.x < this.config.getColsCount() &&
-      // nextHeadPoint.y < this.config.getRowsCount() &&
-      // nextHeadPoint.x >= 0 &&
-      // nextHeadPoint.y >= 0;
+    return !this.snake.isOnPoint(nextHeadPoint);
   },
+  /**
+   * Function check where head of snake and set new coords
+   */
   boundaries() {
     const nextHeadPoint = this.snake.getNextStepHeadPoint();
     if (nextHeadPoint.x > this.config.getRowsCount()) {
-      this.snake.setX(1);
+      this.snake.setX(0);
     } else if (nextHeadPoint.x < 0) {
       this.snake.setX(this.config.getRowsCount());
     }
