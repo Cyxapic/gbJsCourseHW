@@ -28,8 +28,6 @@ class Basket {
      * Отображает количество всех товаров и их цену.
      */
     render() {
-        console.log(this.goods);
-        console.log(this.countEl);
         this.countEl.innerText = this.goods.length;
         this.priceEl.innerText = this.getGoodsPrice();
     };
@@ -38,23 +36,18 @@ class Basket {
      * @returns {number} Цену всех купленных товаров.
      */
     getGoodsPrice() {
-        let summ = 0;
-        this.goods.forEach(el => {
-            summ += +el.goodPrice;
-        });
-        console.log(summ);
-        return summ;
+        return this.goods.reduce((summ, good) => summ + good.goodPrice, 0);
     };
 
     /**
      * Добавляет купленный товар в массив купленных товаров и отображает количество и цену всех товаров.
-     * @param goodName Название товара.
-     * @param goodPrice Цена товара.
+     * @param {string} goodName Название товара.
+     * @param {string} goodPrice Цена товара.
      */
     add(goodName, goodPrice) {
         this.goods.push({
             goodName: goodName,
-            goodPrice: goodPrice
+            goodPrice: +goodPrice
         });
     };
 }
